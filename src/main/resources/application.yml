@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: BlogSystem
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog_system?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      password: 123321
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 3039049837@qq.com
+    password: wczquwzsgtjsdcjd
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.ssl.enable: true
+    protocol: smtp
+
+
+mybatis:
+  type-aliases-package: com.xcg.blogsystem.domain.po
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.xcg.blogsystem.mapper: debug
+#    org.mybatis: debug
+knife4j:
+  setting:
+    swagger-model-name: 实体列表
+
+jwt:
+  header: token
+  secretKey: blogsystem
+  expire-time: 900000 # 15分钟
+
