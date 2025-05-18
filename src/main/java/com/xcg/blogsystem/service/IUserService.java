@@ -2,6 +2,7 @@ package com.xcg.blogsystem.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import com.xcg.blogsystem.domain.dto.ChangePwdDTO;
 import com.xcg.blogsystem.domain.dto.LoginDTO;
 import com.xcg.blogsystem.domain.dto.RegisterDTO;
 import com.xcg.blogsystem.domain.po.User;
@@ -33,4 +34,6 @@ public interface IUserService extends IService<User> {
     Result<String> getCode(String email);
 
     Result<String> updateInfo(User user);
+
+    Result<String> updatePwd(ChangePwdDTO changePwdDTO);
 }

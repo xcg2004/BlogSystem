@@ -4,6 +4,7 @@ import cn.hutool.core.lang.UUID;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
+import com.xcg.blogsystem.domain.dto.ChangePwdDTO;
 import com.xcg.blogsystem.domain.dto.LoginDTO;
 import com.xcg.blogsystem.domain.dto.RegisterDTO;
 import com.xcg.blogsystem.domain.po.User;
@@ -171,5 +172,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return Result.success(userVOS);
     }
 
-
+    @Override
+    public Result<String> updatePwd(ChangePwdDTO changePwdDTO) {
+        //1.查询用户
+        User user = userMapper.selectOne(new LambdaQueryWrapper<User>()
+                .eq(User::getUsername, changePwdDTO.getUsername()));
+        if(user == null){
+            return Result.error("用户名不存在");
+        }
+        boolean flag = user.getPassword().equals(Md5Util.md5(changePwdDTO.getOldPassword()));
+        if(!flag){
+            return Result.error("旧密码错误");
+        }
+        user.setPassword(Md5Util.md5(changePwdDTO.getNewPassword()));
+        userMapper.updateById(user);
+        return Result.success("修改密码成功");
+    }
 }

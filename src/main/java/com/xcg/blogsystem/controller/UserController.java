@@ -2,6 +2,7 @@ package com.xcg.blogsystem.controller;
 
 
 import com.xcg.blogsystem.annotation.AuthorizationAnnotation;
+import com.xcg.blogsystem.domain.dto.ChangePwdDTO;
 import com.xcg.blogsystem.domain.dto.LoginDTO;
 import com.xcg.blogsystem.domain.dto.RegisterDTO;
 import com.xcg.blogsystem.domain.po.User;
@@ -86,6 +87,13 @@ public class UserController {
         log.info("更新用户信息：{}",user);
         return userService.updateInfo(user);
     }
+
+    @PutMapping("/password")
+    public Result<String> updatePassword(@RequestBody ChangePwdDTO changePwdDTO){
+        log.info("更新用户密码：{}",changePwdDTO);
+        return userService.updatePwd(changePwdDTO);
+    }
+
 
 
 }
